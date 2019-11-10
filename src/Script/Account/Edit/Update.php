@@ -1,0 +1,40 @@
+<?php
+
+Core::plugin('Vali/Vali_Mail');
+Core::plugin('Vali/Vali_Username');
+Core::plugin('Vali/Vali_String');
+Core::plugin('Vali/Vali_Date');
+
+Core::class("Auth/Auth");
+Core::class('Account/Account_Update');
+
+$req = Core::request();
+$account_id = Vali_String::val("account", Router::$params[0], true);
+
+Auth::getSession(true, true);
+Auth::permit($account_id, "owner", "admin");
+
+$Account = new Account_Update($account_id);
+
+$Account->mail = Vali_Mail::val("mail", $req->mail, true, 5, 90);
+
+$existing = Account::getIdByMail($Account->mail);
+if (!in_array($existing, [null, $account_id]))
+    throw new ApiException(400, "A1005", "Mail already in use");
+else if (!$existing) $Account->setStatus('unverified');
+
+$Account->username = Vali_Username::val("username", $req->username, true, 6, 90);
+if (!in_array(Account::getIdByUsername($Account->username), [null, $account_id]))
+    throw new ApiException(400, "A1006", "Username already in use");
+
+$Account->firstname = Vali_String::val("firstname", $req->firstname, true, 1, 150, true);
+$Account->lastname = Vali_String::val("lastname", $req->lastname, true, 1, 150, true);
+$Account->birthdate = Vali_Date::val("birthdate", $req->birthdate, false, "1900-01-01", date('Y-m-d'));
+
+if (!isset($req->avatar)) throw new ApiException(422, "X0001", "Avatar (ID) required");
+if (gettype($req->avatar) === "object") $Account->avatar = Vali_String::val("avatar->id", $req->avatar->id, true, 30, 50, true);
+else $Account->avatar = Vali_String::val("avatar", $req->avatar, true, 30, 50, true);
+
+$Account->update();
+
+Response::success(200, "Request successful handled");
