@@ -50,6 +50,7 @@ REPLACE INTO `sys_error_codes` (`code`, `http_code`, `concerns`, `description`, 
 ('D0202',   '500',  'Database',     'DB Prepare Error', NULL),
 ('D0203',   '500',  'Database',     'DB Bind Error', NULL),
 ('D0204',   '500',  'Database',     'DB Execute Error', NULL),
+('D0205',   '500',  'Database',     'Unable to get insert ID', NULL),
 
 ('R0101',   '404',  'Router',       'Version mismatch', NULL),
 ('R0102',   '404',  'Router',       'Route not found', NULL),
@@ -90,5 +91,6 @@ REPLACE INTO `sys_error_codes` (`code`, `http_code`, `concerns`, `description`, 
 
 ('X0001',   '422',  'Scripts',      'Avatar (ID) required', 'Script: Account->Edit->Update'),
 
+('E0001',   '404',  'Errors',       'Entry xy not found', 'Should contain class->method description.'),
 
 ('xyyzz',   '000',  'Template',     'abc', NULL);

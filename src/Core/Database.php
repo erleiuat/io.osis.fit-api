@@ -60,4 +60,12 @@ class Database {
         }
     }
 
+    public static function getID() {
+        try {
+            return self::$db->connection->lastInsertId();
+        } catch (PDOException $e) {
+            throw new ApiException(500, "D0205", "Unable to get insert ID");
+        }
+    }
+
 }
