@@ -53,12 +53,13 @@ class Food {
         }
 
         return (object) [
+            "id" => (int) $arr['a_log_food_id'],
             "aLogFoodID" => (int) $arr['a_log_food_id'],
             "title" => $arr['title'],
-            "totalCalories" => $arr['total_calories'],
-            "totalFat" => $arr['total_fat'],
-            "totalProtein" => $arr['total_protein'],
-            "portionSize" => $arr['portion_size'],
+            "totalCalories" => (double) $arr['total_calories'],
+            "totalFat" => (double) $arr['total_fat'],
+            "totalProtein" => (double) $arr['total_protein'],
+            "portionSize" => (double) $arr['portion_size'],
             "date" => $date,
             "time" => $time
         ];

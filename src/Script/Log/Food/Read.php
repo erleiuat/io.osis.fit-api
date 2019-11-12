@@ -27,7 +27,10 @@ if (isset($_GET['from']) && isset($_GET['to'])) {
 
 $response = [];
 $entries = $food->read($from, $to);
-foreach ($entries as $key => $value) array_push($response, Food::formResponse($value));
+foreach ($entries as $key => $value) {
+    $tmpVal = Food::formResponse($value);
+    $response[$tmpVal->id] = $tmpVal;
+}
 
 Response::data($response);
 Response::success(200, "Request successful handled");

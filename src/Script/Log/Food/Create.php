@@ -23,5 +23,6 @@ $food->time = Vali_Time::val("time", $req->time, false);
 
 $food->create();
 
-Response::data(Food::formResponse((array) $food));
+$tmpVal = Food::formResponse((array) $food);
+Response::data([$tmpVal->id => $tmpVal]);
 Response::success(200, "Request successful handled");
