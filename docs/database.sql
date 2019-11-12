@@ -141,6 +141,79 @@ CREATE TABLE `auth_passreset` (
 
 
 
+-- ______________________________________________________________________________________
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- APP Specific (a_*)
+
+
+-- ------------------------------------------ a_template
+DROP TABLE IF EXISTS `a_template`;
+CREATE TABLE `a_template` (
+    a_template_id       INT NOT NULL AUTO_INCREMENT,
+    account_id          VARCHAR(50) NOT NULL,
+
+    title               VARCHAR(120),
+    calories_per_100    DOUBLE,
+    fat_per_100         DOUBLE,
+    protein_per_100     DOUBLE,
+    portion_size        DOUBLE,
+    image               VARCHAR(50),      
+
+    PRIMARY KEY (a_template_id, account_id),
+    FOREIGN KEY (account_id) REFERENCES account(account_id),
+    FOREIGN KEY (image) REFERENCES acc_image(acc_image_id)
+);
+
+
+-- ------------------------------------------ a_log_food
+DROP TABLE IF EXISTS `a_log_food`;
+CREATE TABLE `a_log_food` (
+    account_id          VARCHAR(50) NOT NULL,
+    a_log_food_id       INT NOT NULL AUTO_INCREMENT,
+
+    title               VARCHAR(120),
+    total_calories      DOUBLE,
+    total_fat           DOUBLE,
+    total_protein       DOUBLE,
+    portion_size        DOUBLE,   
+
+    stamp               TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    PRIMARY KEY (a_log_food_id, account_id),
+    FOREIGN KEY (account_id) REFERENCES account(account_id)
+);
+
+
+-- ------------------------------------------ a_log_activity
+DROP TABLE IF EXISTS `a_log_activity`;
+CREATE TABLE `a_log_activity` (
+    account_id          VARCHAR(50) NOT NULL,
+    a_log_activity_id       INT NOT NULL AUTO_INCREMENT,
+
+    title               VARCHAR(120),
+    burned_calories     DOUBLE,
+    type                ENUM('strength','stamina','fitness','flexibility','coordination','other') DEFAULT 'other',
+
+    stamp               TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    PRIMARY KEY (a_log_activity_id, account_id),
+    FOREIGN KEY (account_id) REFERENCES account(account_id)
+);
+
+
+-- ------------------------------------------ a_log_body
+DROP TABLE IF EXISTS `a_log_body`;
+CREATE TABLE `a_log_body` (
+    account_id          VARCHAR(50) NOT NULL,
+    a_log_body_id       INT NOT NULL AUTO_INCREMENT,
+
+    weight              DOUBLE,
+    body_fat            DOUBLE,
+
+    stamp               TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    PRIMARY KEY (a_log_body_id, account_id),
+    FOREIGN KEY (account_id) REFERENCES account(account_id)
+);
 
 
 
