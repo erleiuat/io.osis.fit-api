@@ -4,8 +4,8 @@ Core::class("Auth/Auth");
 Auth::getSession(true, false);
 Auth::permit(Auth::$session->account->id, "owner", "admin");
 
-Core::class("Log/Food/Food_Read");
-$object = new Food_Read(Auth::$session->account->id);
+Core::class("Log/Activity/Activity_Read");
+$object = new Activity_Read(Auth::$session->account->id);
 
 if (isset($_GET['from']) && isset($_GET['to'])) {
     Core::plugin('Vali/Vali_Date');
@@ -28,7 +28,7 @@ if (isset($_GET['from']) && isset($_GET['to'])) {
 $response = [];
 $entries = $object->read($from, $to);
 foreach ($entries as $key => $value) {
-    $tmpVal = Food::formResponse($value);
+    $tmpVal = Activity::formResponse($value);
     $response[$tmpVal->id] = $tmpVal;
 }
 

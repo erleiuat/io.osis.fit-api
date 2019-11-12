@@ -4,8 +4,8 @@ Core::class("Auth/Auth");
 Auth::getSession(true, false);
 Auth::permit(Auth::$session->account->id, "owner", "admin");
 
-Core::class("Log/Food/Food_Delete");
-$object = new Food_Delete(Auth::$session->account->id);
+Core::class("Log/Body/Body_Delete");
+$object = new Body_Delete(Auth::$session->account->id);
 
 $object->set($object->readById(Router::$params[0]));
 $object->delete();

@@ -207,7 +207,7 @@ CREATE TABLE `a_log_body` (
     a_log_body_id       INT NOT NULL AUTO_INCREMENT,
 
     weight              DOUBLE,
-    body_fat            DOUBLE,
+    fat                 DOUBLE,
 
     stamp               TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
