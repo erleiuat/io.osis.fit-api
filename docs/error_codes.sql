@@ -92,5 +92,7 @@ REPLACE INTO `sys_error_codes` (`code`, `http_code`, `concerns`, `description`, 
 ('X0001',   '422',  'Scripts',      'Avatar (ID) required', 'Script: Account->Edit->Update'),
 
 ('E0001',   '404',  'Errors',       'Entry xy not found', 'Should contain class->method description.'),
+('E0002',   '422',  'Errors',       'Missing params (GET)', NULL),
+
 
 ('xyyzz',   '000',  'Template',     'abc', NULL);
