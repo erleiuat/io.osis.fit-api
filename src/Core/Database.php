@@ -22,6 +22,7 @@ class Database {
             $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         } catch (PDOException $e) {
+            if (ENV_Main::env === "local") print_r($e);
             throw new ApiException(500, "D0201", "DB Connect Error");
         }
 
@@ -36,6 +37,7 @@ class Database {
         try {
             return self::$db->connection->prepare($query);
         } catch (PDOException $e) {
+            if (ENV_Main::env === "local") print_r($e);
             throw new ApiException(500, "D0202", "DB Prepare Error");
         }
     }
@@ -47,6 +49,7 @@ class Database {
                 $stmt->bindParam($params[$i], $values[$i]);
             }
         } catch (PDOException $e) {
+            if (ENV_Main::env === "local") print_r($e);
             throw new ApiException(500, "D0203", "DB Bind Error");
         }
     }
@@ -55,7 +58,7 @@ class Database {
         try {
             $stmt->execute();
         } catch (PDOException $e) {
-            print_r($e);
+            if (ENV_Main::env === "local") print_r($e);
             throw new ApiException(500, "D0204", "DB Execute Error");
         }
     }
@@ -64,6 +67,7 @@ class Database {
         try {
             return self::$db->connection->lastInsertId();
         } catch (PDOException $e) {
+            if (ENV_Main::env === "local") print_r($e);
             throw new ApiException(500, "D0205", "Unable to get insert ID");
         }
     }

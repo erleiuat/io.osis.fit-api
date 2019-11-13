@@ -14,27 +14,27 @@ $account_id = Vali_String::val("account", Router::$params[0], true);
 Auth::getSession(true, true);
 Auth::permit($account_id, "owner", "admin");
 
-$Account = new Account_Update($account_id);
+$obj = new Account_Update($account_id);
 
-$Account->mail = Vali_Mail::val("mail", $req->mail, true, 5, 90);
+$obj->mail = Vali_Mail::val("mail", $req->mail, true, 5, 90);
 
-$existing = Account::getIdByMail($Account->mail);
+$existing = Account::getIdByMail($obj->mail);
 if (!in_array($existing, [null, $account_id]))
     throw new ApiException(400, "A1005", "Mail already in use");
-else if (!$existing) $Account->setStatus('unverified');
+else if (!$existing) $obj->setStatus('unverified');
 
-$Account->username = Vali_Username::val("username", $req->username, true, 6, 90);
-if (!in_array(Account::getIdByUsername($Account->username), [null, $account_id]))
+$obj->username = Vali_Username::val("username", $req->username, true, 6, 90);
+if (!in_array(Account::getIdByUsername($obj->username), [null, $account_id]))
     throw new ApiException(400, "A1006", "Username already in use");
 
-$Account->firstname = Vali_String::val("firstname", $req->firstname, true, 1, 150, true);
-$Account->lastname = Vali_String::val("lastname", $req->lastname, true, 1, 150, true);
-$Account->birthdate = Vali_Date::val("birthdate", $req->birthdate, false, "1900-01-01", date('Y-m-d'));
+$obj->firstname = Vali_String::val("firstname", $req->firstname, true, 1, 150, true);
+$obj->lastname = Vali_String::val("lastname", $req->lastname, true, 1, 150, true);
+$obj->birthdate = Vali_Date::val("birthdate", $req->birthdate, false, "1900-01-01", date('Y-m-d'));
 
 if (!isset($req->avatar)) throw new ApiException(422, "X0001", "Avatar (ID) required");
-if (gettype($req->avatar) === "object") $Account->avatar = Vali_String::val("avatar->id", $req->avatar->id, true, 30, 50, true);
-else $Account->avatar = Vali_String::val("avatar", $req->avatar, true, 30, 50, true);
+if (gettype($req->avatar) === "object") $obj->avatar = Vali_String::val("avatar->id", $req->avatar->id, true, 30, 50, true);
+else $obj->avatar = Vali_String::val("avatar", $req->avatar, true, 30, 50, true);
 
-$Account->update();
+$obj->update();
 
 Response::success(200, "Request successful handled");

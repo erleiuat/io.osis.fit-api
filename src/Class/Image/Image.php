@@ -18,7 +18,6 @@ class Image {
 
     public static function getObject($el) {
 
-        //if(!$el) $el = self;
         $pathRoot = ENV_File::static_url."/".ENV_File::folder."/".hash(ENV_File::hash_alg, $el->account_id)."/".$el->folder."/";
 
         return [
