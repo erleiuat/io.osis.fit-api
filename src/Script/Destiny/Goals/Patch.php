@@ -2,10 +2,13 @@
 
 Core::class("Auth/Auth");
 Auth::getSession(true, false);
-Auth::permit(Auth::$session->account->id, "owner", "admin");
+
+Core::plugin("Vali/Vali_String");
+$id = Vali_String::val("accountID", Router::$params[0], true, 40, 80, true);
+Auth::permit($id, "owner", "admin");
 
 Core::class("Destiny/Goals/Goals_Patch");
-$obj = new Goals_Patch(Auth::$session->account->id);
+$obj = new Goals_Patch($id);
 $obj->read();
 
 Core::plugin("Vali/Vali_Number");
