@@ -6,6 +6,7 @@ class Vali_Number extends Vali {
 
     public static function val($name, $value, $required = false, $min = false, $max = false) {
 
+        if($value == 0) $value = null;
         $value = self::checkNull("Number '" . $name . "'", "V0410", $value, $required);
         if ($value === null) return null;
 

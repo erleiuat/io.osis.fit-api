@@ -216,6 +216,34 @@ CREATE TABLE `a_log_body` (
 );
 
 
+-- ------------------------------------------ a_destiny_goals
+DROP TABLE IF EXISTS `a_destiny_goals`;
+CREATE TABLE `a_destiny_goals` (
+    account_id          VARCHAR(50) NOT NULL,
+
+    weight              DOUBLE,
+    fat                 DOUBLE,
+    date                DATE,
+
+    PRIMARY KEY (account_id),
+    FOREIGN KEY (account_id) REFERENCES account(account_id)
+);
+
+
+-- ------------------------------------------ a_destiny_metabolism
+DROP TABLE IF EXISTS `a_destiny_metabolism`;
+CREATE TABLE `a_destiny_metabolism` (
+    account_id          VARCHAR(50) NOT NULL,
+
+    gender              ENUM('male', 'female'),
+    height              DOUBLE,
+    birthdate           DATE,
+    pal                 DOUBLE,
+
+    PRIMARY KEY (account_id),
+    FOREIGN KEY (account_id) REFERENCES account(account_id)
+);
+
 
 -- ______________________________________________________________________________________
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- APP/API SYSTEM
