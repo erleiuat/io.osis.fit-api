@@ -17,7 +17,7 @@ class Database {
             $this->connection->exec("SET NAMES utf8");
             $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
-            if (ENV_Main::env === "local") throw new ApiException(500, "D0201", ["msg" => "DB Connect Error", "e"=>$e]);
+            if (ENV_Main::env === "local") throw new ApiException(500, "D0201", $e->getMessage());
             throw new ApiException(500, "D0201", "DB Connect Error");
         }
     }
@@ -31,7 +31,7 @@ class Database {
         try {
             return self::$db->connection->prepare($query);
         } catch (PDOException $e) {
-            if (ENV_Main::env === "local") throw new ApiException(500, "D0202", ["msg" => "DB Prepare Error", "e"=>$e]);
+            if (ENV_Main::env === "local") throw new ApiException(500, "D0202", $e->getMessage());
             throw new ApiException(500, "D0202", "DB Prepare Error");
         }
     }
@@ -43,7 +43,7 @@ class Database {
                 $stmt->bindParam($params[$i], $values[$i]);
             }
         } catch (PDOException $e) {
-            if (ENV_Main::env === "local") throw new ApiException(500, "D0203", ["msg" => "DB Bind Error", "e"=>$e]);
+            if (ENV_Main::env === "local") throw new ApiException(500, "D0203", $e->getMessage());
             throw new ApiException(500, "D0203", "DB Bind Error");
         }
     }
@@ -52,7 +52,7 @@ class Database {
         try {
             $stmt->execute();
         } catch (PDOException $e) {
-            if (ENV_Main::env === "local") throw new ApiException(500, "D0204", ["msg" => "DB Execute Error", "e"=>$e]);
+            if (ENV_Main::env === "local") throw new ApiException(500, "D0204", $e->getMessage());
             throw new ApiException(500, "D0204", "DB Execute Error");
         }
     }
@@ -61,7 +61,7 @@ class Database {
         try {
             return self::$db->connection->lastInsertId();
         } catch (PDOException $e) {
-            if (ENV_Main::env === "local") throw new ApiException(500, "D0205", ["msg" => "Unable to get insert ID", "e"=>$e]);
+            if (ENV_Main::env === "local") throw new ApiException(500, "D0205", $e->getMessage());
             throw new ApiException(500, "D0205", "Unable to get insert ID");
         }
     }
