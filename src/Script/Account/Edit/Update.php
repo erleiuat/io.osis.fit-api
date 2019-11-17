@@ -31,9 +31,9 @@ $obj->firstname = Vali_String::val("firstname", $req->firstname, true, 1, 150, t
 $obj->lastname = Vali_String::val("lastname", $req->lastname, true, 1, 150, true);
 $obj->birthdate = Vali_Date::val("birthdate", $req->birthdate, false, "1900-01-01", date('Y-m-d'));
 
-if (!isset($req->avatar)) throw new ApiException(422, "X0001", "Avatar (ID) required");
-if (gettype($req->avatar) === "object") $obj->avatar = Vali_String::val("avatar->id", $req->avatar->id, true, 30, 50, true);
-else $obj->avatar = Vali_String::val("avatar", $req->avatar, true, 30, 50, true);
+if (!array_key_exists('avatar', $req)) throw new ApiException(422, "X0001", "Avatar (ID) required");
+if (gettype($req->avatar) === "object") $obj->avatar = Vali_String::val("avatar->id", $req->avatar->id, false, 30, 50, true);
+else $obj->avatar = Vali_String::val("avatar", $req->avatar, false, 30, 50, true);
 
 $obj->update();
 
