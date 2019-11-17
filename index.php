@@ -33,11 +33,12 @@ try {
     if(get_class($e) === "ApiException") {
         Log::addInformation("ERR_CODE=" . $e->getErrorCode());
         Log::addInformation("ERR_RESP=" . $e->getResponseCode());
+        Log::addInformation("ERR_APIMSG=" . $e->getErrorMessage());
         if (Log::$level === "trace") {
             if ($e->getCode() === 500) Log::setLevel('error');
             else Log::setLevel('debug');
         }
-        Response::error($e->getResponseCode(), $e->getErrorCode(), $e->getMessage());
+        Response::error($e->getResponseCode(), $e->getErrorCode(), $e->getErrorMessage());
     } else {
         Log::addInformation("ERR_CODE=G0001(" . $e->getCode() . ")");
         if (Log::$level === "trace") Log::setLevel('fatal');
