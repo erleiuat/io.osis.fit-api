@@ -90,13 +90,13 @@ bulletproof\utils\resize(
     $orgMime, // image MIME
     $orgWidth, // Original width
     $orgHeight, // Original height
-    900, // New width
-    900, // New Height
+    3850, // New width
+    3850, // New Height
     true, // Keep ratio?
     true, // Upsize if too small?
     false, // corp to size?
     [
-        "jpg" => ["fallback" => 98],
+        "jpg" => ["fallback" => 95],
         "png" => 1
     ]
 );

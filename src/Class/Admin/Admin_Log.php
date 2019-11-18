@@ -29,5 +29,18 @@ class Admin_Log {
 
     }
 
+    public static function delete($level) {
+
+        $stmt = Database::prepare("
+            DELETE FROM ".self::$db_t_log." 
+            WHERE `level` = :level
+        ");
+
+        Database::bind($stmt, ['level'], [$level]);
+
+        Database::execute($stmt);
+
+    }
+
 }
 
