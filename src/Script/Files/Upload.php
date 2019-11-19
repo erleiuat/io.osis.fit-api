@@ -39,14 +39,16 @@ if ($orgMime === "jpeg" && Image_Create::correctOrientation($upload->getFullPath
     $orgHeight = $upload->getHeight();
 }
 
-
 // CREATE COPIES
-$fileLazy = $upload->getLocation()."/".$upload->getName()."_lazy.".$upload->getMime();
-$fileSmall = $upload->getLocation()."/".$upload->getName()."_small.".$upload->getMime();
-$fileMedium = $upload->getLocation()."/".$upload->getName()."_medium.".$upload->getMime();
+$fileOrg = $upload->getLocation()."/".$upload->getName();
+$fileLazy = $upload->getLocation()."/".$upload->getName()."_lazy";
+$fileSmall = $upload->getLocation()."/".$upload->getName()."_small";
+$fileMedium = $upload->getLocation()."/".$upload->getName()."_medium";
+copy($upload->getFullPath(), $fileOrg);
 copy($upload->getFullPath(), $fileLazy);
 copy($upload->getFullPath(), $fileSmall);
 copy($upload->getFullPath(), $fileMedium);
+unlink($upload->getFullPath());
 
 
 // RESIZE LAZY IMAGE
