@@ -9,8 +9,8 @@ $object = new Activity_Read(Auth::$session->account->id);
 
 if (isset($_GET['from']) && isset($_GET['to'])) {
     Core::plugin('Vali/Vali_Date');
-    $from = Vali_Date::val("from", $_GET['from'], true, "1900-01-01", date('Y-m-d'));
-    $to = Vali_Date::val("to", $_GET['to'], true, "1900-01-01", date('Y-m-d'));
+    $from = Vali_Date::val("from", $_GET['from'], true, "1900-01-01", false);
+    $to = Vali_Date::val("to", $_GET['to'], true, "1900-01-01", false);
 } else if (isset($_GET['year']) && isset($_GET['week'])) {
     Core::plugin('Vali/Vali_Number');
     $dto = new DateTime();

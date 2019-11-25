@@ -14,7 +14,7 @@ Core::plugin('Vali/Vali_Time');
 
 $object->weight = Vali_Number::val("weight", $req->weight, true, 1, false);
 $object->fat = Vali_Number::val("fat", $req->fat, false, 1, false);
-$object->date = Vali_Date::val("date", $req->date, false, "1900-01-01", date('Y-m-d'));
+$object->date = Vali_Date::val("date", $req->date, false, "1900-01-01", false);
 $object->time = Vali_Time::val("time", $req->time, false);
 
 $object->create();

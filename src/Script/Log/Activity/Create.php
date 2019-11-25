@@ -16,7 +16,7 @@ Core::plugin('Vali/Vali_Time');
 $object->title = Vali_String::val("title", $req->title, false, 1, 120, true);
 $object->burned_calories = Vali_Number::val("burned_calories", $req->burnedCalories, false, 1, false);
 $object->type = Vali_String::val("type", $req->type, false, 1, 20, true);
-$object->date = Vali_Date::val("date", $req->date, false, "1900-01-01", date('Y-m-d'));
+$object->date = Vali_Date::val("date", $req->date, false, "1900-01-01", false);
 $object->time = Vali_Time::val("time", $req->time, false);
 
 $object->create();
