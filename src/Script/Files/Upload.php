@@ -9,8 +9,8 @@ Auth::permit(Auth::$session->account->id, "owner", "admin");
 
 $image = new Image_Create(Auth::$session->account->id);
 $upload = new Bulletproof\Image($_FILES);
-$upload->setDimension(ENV_File::max_width, ENV_File::max_height); 
-$upload->setSize(ENV_File::min_size, ENV_File::max_size); 
+$upload->setDimension(ENV_File::max_width, ENV_File::max_height);
+$upload->setSize(ENV_File::min_size, ENV_File::max_size);
 
 if (!isset($_FILES["file"])) throw new ApiException(400, "F0100", "Upload File 'file' missing");
 if (!$upload["file"]) throw new ApiException(500, "F0101", "Image 'file' not generated");
