@@ -26,7 +26,7 @@ class Template_Read extends Template {
         $stmt = Database::prepare("
             SELECT * FROM " . self::$db_v_template . " 
             WHERE account_id = :account_id 
-            ORDER BY `a_template_id` DESC
+            ORDER BY `a_template_id` ASC
         ");
 
         Database::bind($stmt, ['account_id'], [$this->account_id]);
