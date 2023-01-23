@@ -6,11 +6,11 @@ require "src/Core/autoload.php";
 error_reporting(ENV_Main::error_reports);
 date_default_timezone_set(ENV_Main::timezone);
 
-#header("Access-Control-Allow-Origin: " . ENV_Main::cors);
-#header("Content-Type: application/json; charset=UTF-8");
-#header("Access-Control-Allow-Credentials: true");
-#header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
-#header("Access-Control-Max-Age: 86400");
+header("Access-Control-Allow-Origin: " . ENV_Main::cors);
+header("Content-Type: application/json; charset=UTF-8");
+header("Access-Control-Allow-Credentials: true");
+header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
+header("Access-Control-Max-Age: 86400");
 
 try {
 
@@ -18,7 +18,7 @@ try {
   Database::connect();
   Router::getRoute();
 
-  #header("Access-Control-Allow-Methods: " . Router::$route->method);
+  header("Access-Control-Allow-Methods: " . Router::$route->method);
 
   if (!Router::$route->script) Response::success(200, "Route has no script");
   else {
