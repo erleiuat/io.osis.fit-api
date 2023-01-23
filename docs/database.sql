@@ -1,6 +1,6 @@
 
--- CREATE DATABASE IF NOT EXISTS `osis_db` CHARACTER SET `utf8`;
--- USE `osis_db`;
+-- CREATE DATABASE IF NOT EXISTS `io.osis.fit` CHARACTER SET `utf8`;
+-- USE `io.osis.fit`;
 
 -- ______________________________________________________________________________________
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- ACCOUNT GENERAL
